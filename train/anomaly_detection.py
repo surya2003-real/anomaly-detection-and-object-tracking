@@ -78,7 +78,7 @@ for ID in unique_ids:
     mse = np.array(mse)
 
 
-    threshold = mse.mean() + 3 * mse.std()
+    threshold = 0.02 # Adjust as needed
     anomalies = (mse > threshold).astype(int)
     #check if anomalies are detected
     if(np.sum(anomalies) == 0):

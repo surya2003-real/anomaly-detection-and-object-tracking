@@ -1,64 +1,50 @@
-# Object Tracking and Anomaly Detection
+# Anomaly Detection and Object Tracking (ADOT)
 ## Introduction
-We have built an object tracking an detection system using a Raspberry Pi 3B+ and a Pi Camera. The system is able to detect and track objects in real time and can detect anomalies in the video stream. It is also able to detect and track multiple objects at the same time and is able to detect anomalies in the video stream and can send an alert to the user if an anomaly is detected. 
+ADOT model offers you the features for detecting anomalies in various public places such as airports, railway stations, bus stations, etc. It also provides the feature of tracking the detected objects.
+
+To train the model read the [README.md](./train/README.md) file in the train folder.
+Here I will explain how to use the model for detecting anomalies and tracking objects.
+
 ## Getting Started
-### Prerequisites
-* Raspberry Pi 3B+
-* Pi Camera
-* Python 3.7
-* OpenCV 4.1.0
-* Numpy 1.16.4
-* Tensorflow 1.14.0
-* Keras 2.2.4
+So let's get started to run the model for detecting anomalies and tracking objects at realtime.
+## Requirements
+- Python
+- Tensorflow
+- OpenCV
+- Numpy
+- Matplotlib
+- Pillow
+- Scikit-learn
+- argparse
 
-### Installation
-1. Install OpenCV 4.1.0
-```
-pip install opencv-python==4.1.0
-```
-2. Install Numpy 1.16.4
-```
-pip install numpy==1.16.4
-```
-3. Install Tensorflow 1.14.0
-```
-pip install tensorflow==1.14.0
-```
-4. Install Keras 2.2.4
-```
-pip install keras==2.2.4
-```
 ## Usage
-### Object Tracking
-1. Run the object tracking script
+### Detecting Anomalies
+To detect anomalies in a video, run the following command:
 ```
-python model.py
+cd realtime_anomaly_detection
 ```
-2. Create dataset for training
 ```
-python model2.py
-python arrange.py
+py detect_anomalies.py --video_path <path to video> --threshold <threshold value>
 ```
-### Training
-1. Run the training script
-```
-python LSTM_autoencoder.py
-```
-### Anomaly Detection
-1. Run the anomaly detection script
-```
-python anomaly_detection.py
-```
-## Description of Architecture
-### Object Tracking
-1. The object tracking system uses a pre-trained YOLOv8 pose model to detect objects in the video stream.
-2. The detected objects are then tracked using the BoT-SORT tracker.
-3. The system is able to track multiple objects at the same time.
-### Anomaly Detection
-1. The anomaly detection system uses an LSTM autoencoder to detect anomalies in the video stream.
-2. The LSTM autoencoder is trained on the CUHK Avenue dataset.
-3. The system is able to detect anomalies in the video stream and can send an alert to the user if an anomaly is detected.
+Note: The threshold value should be between 0 and 1. The default value is 0.004. For larger videos with more field of view, the threshold value should be greater(about 0.02). For smaller videos confined to a small area, the threshold value should be smaller(about 0.002).
 
+The code will run and display the video with the detected anomalies in the realtime.
+
+## Model Architecture
+### Live Data Capture: 
+Begin by capturing real-time environmental data using a Raspberry Pi camera.​
+
+### Human Detection with "BoT-SORT": 
+Employ "BoT-SORT" to identify human subjects and track their movements. This system is effective even when humans are partially obscured.​
+
+### Pose Estimation using YOLOV8-Pose: 
+Use YOLOV8 to determine the poses of detected humans, providing detailed information about their body orientations using 17 keypoints which detects eyes, hands, etc.​
+
+### Anomaly Detection with LSTM Autoencoders: 
+Apply LSTM autoencoders for time-series analysis to predict the future positions and poses of humans. Anomalies are detected when prediction errors surpass a defined threshold.​
+
+### Visual Alarm Activation: 
+Upon anomaly detection, trigger a visual alarm (e.g., blinking an LED light) by sending a signal through the WiFi module.​
 ## Authors
-* **[Suryansh Goel](github.com/surya2003-real)**
+* **[Suryansh Goel](www.github.com/surya2003-real)**
 
