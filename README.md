@@ -26,6 +26,10 @@ cd realtime_anomaly_detection
 ```
 py detect_anomalies.py --video_path <path to video> --threshold <threshold value>
 ```
+For feeding images through webcam, run the following command, put 0 in place of video path:
+```
+py detect_anomalies.py --video_path 0 --threshold <threshold value>
+```
 Note: The threshold value should be between 0 and 1. The default value is 0.004. For larger videos with more field of view, the threshold value should be greater(about 0.02). For smaller videos confined to a small area, the threshold value should be smaller(about 0.002).
 
 The code will run and display the video with the detected anomalies in the realtime.

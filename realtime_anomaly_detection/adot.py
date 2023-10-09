@@ -33,7 +33,10 @@ standard_width = 640
 standard_height = 480
 
 # Open the video file
-cap = cv2.VideoCapture(args.video_path)
+if(args.video_path=="0"):
+    cap = cv2.VideoCapture(0)
+else:
+    cap = cv2.VideoCapture(args.video_path)
 
 # Store the track history
 track_history = defaultdict(lambda: [])
