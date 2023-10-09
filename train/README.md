@@ -29,6 +29,10 @@ pip install tensorflow==1.14.0
 pip install keras==2.2.4
 ```
 ## Usage
+First go to the train directory:
+```
+cd train
+```
 ### Object Tracking
 1. Run the object tracking script
 ```
