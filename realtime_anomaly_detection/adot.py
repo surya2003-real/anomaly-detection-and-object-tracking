@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser()
 
 # Define command-line arguments
 parser.add_argument('--video_path', type=str, default="../videos/anomaly_1.mp4", help="Path to the video file")
-parser.add_argument('--threshold', type=float, default=0.004, help="Anomaly detection threshold")
+parser.add_argument('--threshold', type=float, default=0.02, help="Anomaly detection threshold")
 
 # Parse the command-line arguments
 args = parser.parse_args()
@@ -58,6 +58,8 @@ threshold = args.threshold  # Adjust as needed
 
 # Loop through the video frames
 frame_count = 0
+net_mse = 0
+avg_mse = 0
 while cap.isOpened():
     # Read a frame from the video
     success, frame = cap.read()
@@ -110,8 +112,10 @@ while cap.isOpened():
                         # Calculate the MSE between the predicted and actual values
                         mse = calculate_mse(buffer_array[-prediction_time:], x_pred_original)
                         print(mse)
+                        net_mse = mse+net_mse
+                        avg_mse= net_mse/frame_count
                         # Check if the MSE exceeds the threshold to detect an anomaly
-                        if mse > threshold:
+                        if mse > 1.5*avg_mse*0.25 + 0.75*threshold:
                             if(anomaly_text==""):
                                 anomaly_text = f"Anomaly detected for ID {track_ids[i]}"
                             else:
@@ -121,6 +125,7 @@ while cap.isOpened():
                         # Remove the oldest data point from the buffer to maintain its size
                         id_buffers[track_ids[i]].pop(0)
             else:
+                anomaly_text = ""
                 # If 'int' attribute doesn't exist (no detections), set track_ids to an empty list
                 track_ids = []
 
