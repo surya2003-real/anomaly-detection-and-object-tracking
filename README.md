@@ -5,6 +5,10 @@ ADOT model offers you the features for detecting anomalies in various public pla
 To train the model read the [README.md](./train/README.md) file in the train folder.
 Here I will explain how to use the model for detecting anomalies and tracking objects.
 
+Model detects anomaly in behaviour of humans:
+
+![model detecting anomaly](./images/model_image1.jpg)
+In this image a man is seen holding the stick and beating a person, model detects it as an anomaly,
 ## Getting Started
 So let's get started to run the model for detecting anomalies and tracking objects at realtime.
 ## Requirements
@@ -49,6 +53,16 @@ Apply LSTM autoencoders for time-series analysis to predict the future positions
 
 ### Visual Alarm Activation: 
 Upon anomaly detection, trigger a visual alarm (e.g., blinking an LED light) by sending a signal through the WiFi module.​
+
+## Training and Results
+The model is trained on the MOT Dataset and is an unsupervised learning model. The model is trained on the frames of the videos.
+We have used RTX 4070 GPU for training the model. 
+It gives the following results for detecting anomalies in UCF-Crime Dataset:
+- Latency per frame: 10ms
+- FPS: 100
+
+For more info on training read [README.md](./train/README.md) file in the train folder.
+
 ## Authors
 * **[Suryansh Goel](www.github.com/surya2003-real)**
 

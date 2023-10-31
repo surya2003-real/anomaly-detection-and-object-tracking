@@ -5,29 +5,11 @@ We have built an object tracking an detection system using a Raspberry Pi 3B+ an
 ### Prerequisites
 * Raspberry Pi 3B+
 * Pi Camera
-* Python 3.7
-* OpenCV 4.1.0
-* Numpy 1.16.4
-* Tensorflow 1.14.0
-* Keras 2.2.4
-
-### Installation
-1. Install OpenCV 4.1.0
-```
-pip install opencv-python==4.1.0
-```
-2. Install Numpy 1.16.4
-```
-pip install numpy==1.16.4
-```
-3. Install Tensorflow 1.14.0
-```
-pip install tensorflow==1.14.0
-```
-4. Install Keras 2.2.4
-```
-pip install keras==2.2.4
-```
+* Python
+* OpenCV
+* Numpy
+* Tensorflow
+* Keras
 ## Usage
 First go to the train directory:
 ```
@@ -60,7 +42,7 @@ py anomaly_detection.py
 3. The system is able to track multiple objects at the same time.
 ### Anomaly Detection
 1. The anomaly detection system uses an LSTM autoencoder to detect anomalies in the video stream.
-2. The LSTM autoencoder is trained on the CUHK Avenue dataset.
+2. The LSTM autoencoder is trained on the MOT dataset.
 3. The system is able to detect anomalies in the video stream and can send an alert to the user if an anomaly is detected.
 
 ## Authors
